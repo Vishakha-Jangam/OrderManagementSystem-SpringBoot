@@ -1,0 +1,16 @@
+Customer Object:
+
+{
+    "name" :"pqr",
+    "userName":"pqr",
+    "email" : "pqr@gmail.com",
+    "password" :"456"
+}
+
+Order Object: also passing pathvariable as customerId;
+{
+            "totalPrice": 50000,
+            "description": "Product description",
+            "productName": "mobile",
+            "quantity": 2
+}
