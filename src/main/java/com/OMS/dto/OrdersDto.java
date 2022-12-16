@@ -1,29 +1,41 @@
 package com.OMS.dto;
 
-import com.OMS.entity.Customer;
+import java.time.LocalDateTime;
+
 
 public class OrdersDto {
 
-	
+	private Long orderId;
+	private LocalDateTime date=LocalDateTime.now();
 	private Integer totalPrice;
 	private String description;
 	private String productName;
-	private Integer productPrice;
 	private Integer quantity;
-	private Customer customer;
 	public OrdersDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public OrdersDto(Integer totalPrice, String description, String productName, Integer productPrice, Integer quantity,
-			Customer customer) {
+	public OrdersDto(Long orderId, LocalDateTime date, Integer totalPrice, String description, String productName,
+			Integer quantity) {
 		super();
+		this.orderId = orderId;
+		this.date = date;
 		this.totalPrice = totalPrice;
 		this.description = description;
 		this.productName = productName;
-		this.productPrice = productPrice;
 		this.quantity = quantity;
-		this.customer = customer;
+	}
+	public Long getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
+	}
+	public LocalDateTime getDate() {
+		return date;
+	}
+	public void setDate(LocalDateTime date) {
+		this.date = date;
 	}
 	public Integer getTotalPrice() {
 		return totalPrice;
@@ -43,29 +55,13 @@ public class OrdersDto {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-	public Integer getProductPrice() {
-		return productPrice;
-	}
-	public void setProductPrice(Integer productPrice) {
-		this.productPrice = productPrice;
-	}
 	public Integer getQuantity() {
 		return quantity;
 	}
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
-	public Customer getCustomer() {
-		return customer;
-	}
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-	@Override
-	public String toString() {
-		return "OrdersDto [totalPrice=" + totalPrice + ", description=" + description + ", productName=" + productName
-				+ ", productPrice=" + productPrice + ", quantity=" + quantity + ", customer=" + customer + "]";
-	}
+	
 	
 	
 }

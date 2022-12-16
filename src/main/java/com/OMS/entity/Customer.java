@@ -1,6 +1,9 @@
 package com.OMS.entity;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,10 +14,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 
 @Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"userName"})})
 public class Customer {
 
 	    @Id
@@ -29,11 +35,12 @@ public class Customer {
 		
 		private String password;
 		
+		private Integer discountPrice=0;
+		
 		private String category="Regular";
 		
-		@NotNull
-		@OneToMany(mappedBy = "orderId",cascade = CascadeType.ALL, orphanRemoval = true)
-		private List<Orders> orders;
+		@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+		private Set<Orders> orders = new HashSet<>();
 
 		
 		public Customer() {
@@ -42,14 +49,15 @@ public class Customer {
 		}
 
 
-		public Customer(Long customer_id, String name, String userName, String email, String password, String category,
-				List<Orders> orders) {
+		public Customer(Long customer_id, String name, String userName, String email, String password,
+				Integer discountPrice, String category, Set<Orders> orders) {
 			super();
 			this.customer_id = customer_id;
 			this.name = name;
 			this.userName = userName;
 			this.email = email;
 			this.password = password;
+			this.discountPrice = discountPrice;
 			this.category = category;
 			this.orders = orders;
 		}
@@ -105,6 +113,16 @@ public class Customer {
 		}
 
 
+		public Integer getDiscountPrice() {
+			return discountPrice;
+		}
+
+
+		public void setDiscountPrice(Integer discountPrice) {
+			this.discountPrice = discountPrice;
+		}
+
+
 		public String getCategory() {
 			return category;
 		}
@@ -115,16 +133,13 @@ public class Customer {
 		}
 
 
-		public List<Orders> getOrders() {
+		public Set<Orders> getOrders() {
 			return orders;
 		}
 
 
-		public void setOrders(List<Orders> orders) {
+		public void setOrders(Set<Orders> orders) {
 			this.orders = orders;
 		}
-		
-		
 
-		
 }
